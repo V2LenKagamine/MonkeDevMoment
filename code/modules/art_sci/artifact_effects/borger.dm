@@ -18,6 +18,8 @@
 	COOLDOWN_DECLARE(borg_cooldown)
 
 /datum/artifact_effect/borger/effect_touched(mob/living/user)
+	if(!our_artifact.holder)
+		return
 	if(!iscarbon(user) || !COOLDOWN_FINISHED(src, borg_cooldown) || QDELETED(user.client) || did_robot_touch(user))
 		our_artifact.holder.visible_message(span_smallnoticeital("[our_artifact.holder] does not react to [user]."))
 		return

@@ -3921,6 +3921,7 @@
 #include "code\modules\art_sci\artifact_effects\cleaning.dm"
 #include "code\modules\art_sci\artifact_effects\emoter.dm"
 #include "code\modules\art_sci\artifact_effects\false_rod.dm"
+#include "code\modules\art_sci\artifact_effects\fantasy.dm"
 #include "code\modules\art_sci\artifact_effects\forcegen.dm"
 #include "code\modules\art_sci\artifact_effects\gun.dm"
 #include "code\modules\art_sci\artifact_effects\heal.dm"

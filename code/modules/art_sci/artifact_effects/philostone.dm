@@ -1,6 +1,11 @@
+#define PERMITTED_MATERIAL_REPLACE_TYPES list(\
+	/obj/structure/chair, \
+	/obj/structure/table, \
+	/obj/structure/toilet, \
+	/obj/structure/sink,)
+
 /datum/artifact_effect/philostone
-	examine_hint = "Radiates a midas like aura"
-	examine_discovered = "Turns nearby Iron into Gold!"
+	examine_discovered = "Turns nearby iron structures into gold!"
 	weight = ARTIFACT_VERYRARE
 	research_value = TECHWEB_TIER_7_POINTS //GOOOOOOOOOLD
 	type_name = "Midas Stone Effect"
@@ -13,10 +18,18 @@
 			if(istype(thing,/turf/open/floor/material) || istype(thing, /turf/closed/wall/material))
 				if(thing.has_material_type(GET_MATERIAL_REF(/datum/material/iron)))
 					thing.set_custom_materials(custom_transform)
-		for(var/obj/thingy in range(1,owner_turf))
+		for(var/obj/thingy in range(1,owner_turf)) //this is supposed to do /any/ iron but I can't get it to work right so
+			if(!can_replace_material(thingy))
+				continue
 			if(thingy.has_material_type(GET_MATERIAL_REF(/datum/material/iron)))
 				thingy.set_custom_materials(custom_transform)
-				thingy.update_icon()
-				thingy.update_name()
-				thingy.update_desc()
+				thingy.update_overlays()
+				thingy.update_appearance()
 
+/datum/artifact_effect/philostone/proc/can_replace_material(obj/object)
+	for (var/type in PERMITTED_MATERIAL_REPLACE_TYPES)
+		if (istype(object, type))
+			return TRUE
+	return FALSE
+
+#undef PERMITTED_MATERIAL_REPLACE_TYPES

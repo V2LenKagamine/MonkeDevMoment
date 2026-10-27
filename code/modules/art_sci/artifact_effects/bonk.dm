@@ -22,7 +22,7 @@
 	if(!COOLDOWN_FINISHED(src, bonk_cooldown))
 		return
 
-	if(iscarbon(user))
+	if(iscarbon(user) && our_artifact?.holder)
 		var/mob/living/carbon/carbon = user
 		if(!carbon.get_bodypart(BODY_ZONE_HEAD))
 			our_artifact.holder.say("My condolences to your missing head.") //they can speak uhh galactic common because alien tech idk

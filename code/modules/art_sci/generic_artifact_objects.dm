@@ -90,3 +90,5 @@ ARTIFACT_SETUP(/obj/structure/artifact, SSobj, null, forced_effect, null)
 /obj/structure/artifact/narsieoffering
 	forced_effect = /datum/artifact_effect/narsieoffering
 
+/obj/structure/artifact/fantasy
+	forced_effect = /datum/artifact_effect/fantasy
