@@ -26,13 +26,13 @@
 		build_weighted_rarities()
 
 	var/obj/type_of_artifact = pick_weight(list(
-		/obj/structure/artifact = 70,
-		/obj/item/artifact_item = 10,
-		/obj/item/artifact_item_tiny = 10,
-		/obj/item/stock_parts/power_store/cell/artifact = 2.5,
-		/obj/item/gun/magic/artifact = 2.5,
-		/obj/item/melee/artifact = 2.5,
-		/obj/machinery/power/generator_artifact = 2.5
+		/obj/structure/artifact = 60,
+		/obj/item/artifact_item = 5,
+		/obj/item/artifact_item_tiny = 5,
+		/obj/item/stock_parts/power_store/cell/artifact = 5,
+		/obj/item/gun/magic/artifact = 5,
+		/obj/item/melee/artifact = 5,
+		/obj/machinery/power/generator_artifact = 5
 	))
 
 	var/obj/A = new type_of_artifact(loc,forced_origin,forced_effect)
@@ -45,6 +45,8 @@
 		GLOB.artifact_effect_rarity[initial(origin.type_name)] = list()
 
 	for(var/datum/artifact_effect/artifact_effect as anything in subtypesof(/datum/artifact_effect))
+		if(artifact_effect.do_not_roll)
+			continue
 		var/weight = initial(artifact_effect.weight)
 		if(!weight)
 			continue

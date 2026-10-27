@@ -37,4 +37,3 @@
 	item.w_class++
 	if(item.w_class > WEIGHT_CLASS_HUGE)
 		our_artifact.holder.visible_message("[our_artifact.holder] becomes to cumbersome to carry!")
-		our_artifact.holder.anchored = TRUE

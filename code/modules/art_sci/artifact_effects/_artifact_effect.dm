@@ -25,8 +25,6 @@
 	var/deactivation_sound
 	///list of paths the artifacts holder is allowed to be, if null, may be on any artifact datum holder.
 	var/list/valid_type_paths
-	///Does this show up on the artifact fourm?
-	var/super_secret = FALSE
 
 	///Research value when discovered For reference, 40 is one node
 	var/research_value = TECHWEB_DISCOUNT_MINOR
@@ -34,6 +32,10 @@
 	var/datum/component/artifact/our_artifact
 	///Type of effect, shows up in Xray Machine
 	var/type_name = "Generic Artifact Effect"
+	///This artifact is not real, and can not be rolled normally.
+	var/do_not_roll = FALSE
+	///Does this show up on the artifact fourm?
+	var/super_secret = FALSE
 
 /datum/artifact_effect/New()
 	. = ..()

@@ -21,7 +21,7 @@
 	name = "Heat Sensitivity"
 	required_stimuli = STIMULUS_HEAT
 	highest_trigger_amount = 750
-	hint_texts = list("It feels like someone messed with the thermostat.", "It feels unpleasant being near.")
+	hint_texts = list("It feels like someone messed with the thermostat.", "It feels unpleasant being near.", "You can't tell if its hot or cold.")
 	discovered_text = "Activated by Thermal Energy"
 
 /datum/artifact_activator/range/heat/New()

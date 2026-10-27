@@ -1,5 +1,5 @@
 /datum/artifact_effect/bomb
-	examine_hint = span_warning("It is covered in very conspicuous markings.")
+	examine_hint = span_warning("This looks like it shouldn't be here.")
 	valid_activators = list(
 		/datum/artifact_activator/range/force,
 		/datum/artifact_activator/range/heat,
@@ -8,9 +8,11 @@
 	)
 	research_value = TECHWEB_DISCOUNT_MINOR * 2
 
-	type_name = "Explosive Effect"
-	examine_discovered = span_warning("It appears to explode.")
+	type_name = "(Base) Explosion Effect"
+	examine_discovered = span_warning("This is a base class. This should not appear.")
 
+	super_secret = TRUE
+	do_not_roll = TRUE
 
 	var/dud = FALSE
 	var/dud_message = "sputters, failing to activate! Its a dud!"
@@ -82,6 +84,8 @@
 /datum/artifact_effect/bomb/explosive
 	type_name = "Bomb"
 	weight = ARTIFACT_RARE
+	super_secret = FALSE
+	do_not_roll = FALSE
 	var/devast
 	var/heavy
 	var/light
@@ -108,6 +112,9 @@
 	weight = ARTIFACT_VERYRARE
 	explode_delay = 2 MINUTES
 
+	super_secret = FALSE
+	do_not_roll = FALSE
+
 /datum/artifact_effect/bomb/explosive/devastating/New()
 	..()
 	devast = rand(2,4)
@@ -132,6 +139,8 @@
 		/datum/gas/hydrogen = 5,
 		/datum/gas/zauker = 2,
 	)
+	super_secret = FALSE
+	do_not_roll = FALSE
 
 /datum/artifact_effect/bomb/gas/setup()
 	. = ..()
