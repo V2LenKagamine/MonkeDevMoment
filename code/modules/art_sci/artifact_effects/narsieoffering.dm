@@ -3,8 +3,8 @@
 	type_name = "Dark Altar Effect"
 	weight = ARTIFACT_COMMON //Common because can only be on carbon touch narsie
 
-	examine_hint = span_warning("You feel safe and complacent around this...")
-	valid_origins = list(ORIGIN_NARSIE)
+	examine_hint = span_warning("You feel calm and safe around this...")
+	valid_origins = list(/datum/artifact_origin/narsie)
 
 	valid_activators = list(/datum/artifact_activator/touch/carbon)
 
@@ -17,7 +17,7 @@
 	var/stored_blood = 0
 
 	COOLDOWN_DECLARE(force_take_cooldown)
-	///List of valid items this artifact can spawn when full on blood (needs 5 bodys of blood.)
+	///List of valid items this artifact can spawn when full on blood (needs 3 bodys of blood.)
 	var/static/list/obj/valid_spawns = list(
 		/obj/item/soulstone/anybody = 1, //Lucky you.
 		/obj/item/clothing/suit/hooded/cultrobes = 20,
@@ -33,22 +33,25 @@
 /datum/artifact_effect/narsieoffering/effect_touched(mob/living/user)
 	if(!COOLDOWN_FINISHED(src,force_take_cooldown))
 		to_chat(user,"You feel [our_artifact.holder] is not yet ready for what it has planned...")
+		return
 	if(!user.blood_volume || !iscarbon(user))
 		to_chat(user, span_info("You feel a need to give your non existant blood."))
+		return
 	if(user.blood_volume <= blood_to_take)
 		to_chat(user,span_info("You feel a need to give more blood, but [our_artifact.holder] deems you too weak to do so!"))
+		return
 	var/yoinked_blood = min(blood_to_take,user.blood_volume)
 	user.blood_volume -= yoinked_blood
 	stored_blood += yoinked_blood
-	to_chat(user, span_boldwarning("You are compelled to give blood to the [our_artifact.holder]; and feel your blood volume lower somehow!"))
+	to_chat(user, span_boldwarning("You are compelled to give blood to the [our_artifact.holder]; and feel your blood draining from your body!"))
 	COOLDOWN_START(src, force_take_cooldown, 5 SECONDS)
 
-	if(stored_blood < BLOOD_VOLUME_NORMAL*5)
+	if(stored_blood < BLOOD_VOLUME_NORMAL*3)
 		return
 	var/turf/our_turf = get_turf(our_artifact.holder);
 	var/obj/tomake = pick_weight(valid_spawns)
 	var/obj/chosen = new tomake(our_turf)
 	to_chat(user, span_info("[our_artifact.holder] is pleased with your work, and [chosen] appears from seemingly nowhere!"))
-	stored_blood -= BLOOD_VOLUME_NORMAL*5
+	stored_blood -= BLOOD_VOLUME_NORMAL*3
 
 

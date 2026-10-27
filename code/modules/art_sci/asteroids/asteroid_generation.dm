@@ -7,10 +7,13 @@
 	baseturfs = /turf/open/misc/asteroid/airless/tospace
 
 /turf/closed/mineral/random/asteroid/tospace/highchance
-	mineralChance = 35
+	mineralChance = 40
+
+/turf/closed/mineral/random/asteroid/tospace/mediumchance
+	mineralChance = 25
 
 /turf/closed/mineral/random/asteroid/tospace/lowchance
-	mineralChance = 10
+	mineralChance = 15
 
 /turf/closed/mineral/random/asteroid/tospace/mineral_chances()
 	return list(

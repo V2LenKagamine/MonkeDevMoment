@@ -91,43 +91,12 @@
 		valid_origins = list(forced_origin)
 	var/datum/artifact_origin/picked_origin = pick(valid_origins)
 	artifact_origin = new picked_origin
-	fake_name = "[pick(artifact_origin.name_vars["adjectives"])] [pick(isitem(holder) ? artifact_origin.name_vars["small-nouns"] : artifact_origin.name_vars["large-nouns"])]"
-	if(prob(95))
+	if(prob(90))
 		var/picked_fault = pick_weight(fault_weight_list)
 		chosen_fault = new picked_fault
 		chosen_fault.our_artifact = src
 		chosen_fault.on_added(src)
 
-	generated_name = artifact_origin.generate_name()
-	if(!generated_name)
-		generated_name  = "[pick(artifact_origin.name_vars["adjectives"])] [pick(isitem(holder) ? artifact_origin.name_vars["small-nouns"] : artifact_origin.name_vars["large-nouns"])]"
-
-	holder.name = fake_name
-	holder.desc = "Some sort of artifact from a time long past."
-
-	var/dat_icon
-	switch(artifact_size)
-		if(ARTIFACT_SIZE_LARGE)
-			holder.icon = artifact_origin.icon_file_large
-			dat_icon = "[artifact_origin.sprite_name]-[rand(1,artifact_origin.max_icons)]"
-		if(ARTIFACT_SIZE_SMALL)
-			holder.icon = artifact_origin.icon_file_medium
-			dat_icon = "[artifact_origin.sprite_name]-[rand(1,artifact_origin.max_item_icons)]"
-		if(ARTIFACT_SIZE_TINY)
-			holder.icon = artifact_origin.icon_file_small
-			dat_icon = "[artifact_origin.sprite_name]-[rand(1,artifact_origin.max_item_icons_small)]"
-	holder.icon_state = dat_icon
-
-	//wizards got an extract MA for the gem coloring, if we have extras add them below this
-	if(artifact_origin.type_name == ORIGIN_WIZARD)
-		extra_effect = mutable_appearance(holder.icon, "[holder.icon_state]-gem", ABOVE_OBJ_LAYER, offset_spokesman = holder)
-		extra_effect.color = random_rgb_pairlists(artifact_origin.overlays_reds, artifact_origin.overlays_blues, artifact_origin.overlays_greens, artifact_origin.overlays_alpha)
-
-	holder.update_appearance() // force an all update specifically to try and apply secondary overlays
-
-	act_effect = mutable_appearance(holder.icon, "[holder.icon_state]fx", offset_spokesman = holder, alpha = rand(artifact_origin.overlays_alpha[1], artifact_origin.overlays_alpha[2]))
-	act_effect.color = random_rgb_pairlists(artifact_origin.overlays_reds, artifact_origin.overlays_blues, artifact_origin.overlays_greens, artifact_origin.overlays_alpha)
-	act_effect.overlays += emissive_appearance(act_effect.icon, act_effect.icon_state, holder, alpha = act_effect.alpha)
 	activation_sound = pick(artifact_origin.activation_sounds)
 	if(LAZYLEN(artifact_origin.deactivation_sounds))
 		deactivation_sound = pick(artifact_origin.deactivation_sounds)
@@ -145,8 +114,42 @@
 		artifact_effects += added_boogaloo
 		added_boogaloo.our_artifact = src
 		added_boogaloo.setup()
+		if(added_boogaloo.valid_origins && !(artifact_origin in added_boogaloo.valid_origins))//Ensures the forced effect matches the origin.
+			qdel(artifact_origin)
+			var/datum/artifact_origin/toobad = pick(added_boogaloo.valid_origins)
+			artifact_origin = new toobad
+	//Ok we're done fucking with the origins and shit, go ahead and draw the icons and give name.
+	fake_name = "[pick(artifact_origin.name_vars["adjectives"])] [pick(isitem(holder) ? artifact_origin.name_vars["small-nouns"] : artifact_origin.name_vars["large-nouns"])]"
+	generated_name = artifact_origin.generate_name()
+	if(!generated_name)
+		generated_name  = "[pick(artifact_origin.name_vars["adjectives"])] [pick(isitem(holder) ? artifact_origin.name_vars["small-nouns"] : artifact_origin.name_vars["large-nouns"])]"
+	holder.name = fake_name
+	holder.desc = "Some sort of artifact from a time long past."
+	var/dat_icon
+	switch(artifact_size)
+		if(ARTIFACT_SIZE_LARGE)
+			holder.icon = artifact_origin.icon_file_large
+			dat_icon = "[artifact_origin.sprite_name]-[rand(1,artifact_origin.max_icons)]"
+		if(ARTIFACT_SIZE_SMALL)
+			holder.icon = artifact_origin.icon_file_medium
+			dat_icon = "[artifact_origin.sprite_name]-[rand(1,artifact_origin.max_item_icons)]"
+		if(ARTIFACT_SIZE_TINY)
+			holder.icon = artifact_origin.icon_file_small
+			dat_icon = "[artifact_origin.sprite_name]-[rand(1,artifact_origin.max_item_icons_small)]"
+	holder.icon_state = dat_icon
+	//wizards got an extract MA for the gem coloring, if we have extras add them below this
+	if(artifact_origin.type_name == ORIGIN_WIZARD)
+		extra_effect = mutable_appearance(holder.icon, "[holder.icon_state]-gem", ABOVE_OBJ_LAYER, offset_spokesman = holder)
+		extra_effect.color = random_rgb_pairlists(artifact_origin.overlays_reds, artifact_origin.overlays_blues, artifact_origin.overlays_greens, artifact_origin.overlays_alpha)
+
+	holder.update_appearance() // force an all update specifically to try and apply secondary overlays
+
+	act_effect = mutable_appearance(holder.icon, "[holder.icon_state]fx", offset_spokesman = holder, alpha = rand(artifact_origin.overlays_alpha[1], artifact_origin.overlays_alpha[2]))
+	act_effect.color = random_rgb_pairlists(artifact_origin.overlays_reds, artifact_origin.overlays_blues, artifact_origin.overlays_greens, artifact_origin.overlays_alpha)
+	act_effect.overlays += emissive_appearance(act_effect.icon, act_effect.icon_state, holder, alpha = act_effect.alpha)
 	if(!length(GLOB.artifact_effect_rarity["all"]))
 		build_weighted_rarities()
+
 	var/list/datum/artifact_effect/dont_touch = GLOB.artifact_effect_rarity["all"] //Dont touch because below.
 	var/list/datum/artifact_effect/all_possible_effects = dont_touch.Copy() //If you touch it, it actually edits the list, we need a copy. We cant call copy directly because its not a static type list.
 	var/effects_amount = rand(1,BASE_MAX_EFFECTS)
@@ -263,7 +266,7 @@
 			QDEL_NULL(added)
 			return FALSE
 	if(length(added.valid_origins))
-		if(!(artifact_origin.type_name in added.valid_origins))
+		if(!(artifact_origin in added.valid_origins))
 			QDEL_NULL(added)
 			return FALSE
 	if(length(added.valid_activators))
@@ -275,7 +278,7 @@
 		if(!good_activators)
 			QDEL_NULL(added)
 			return FALSE
-	if(added.artifact_size)
+	if(added.artifact_size != null)
 		if(artifact_size != added.artifact_size)
 			QDEL_NULL(added)
 			return FALSE

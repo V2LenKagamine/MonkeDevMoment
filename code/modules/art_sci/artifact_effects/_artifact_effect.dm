@@ -32,7 +32,7 @@
 	var/datum/component/artifact/our_artifact
 	///Type of effect, shows up in Xray Machine
 	var/type_name = "Generic Artifact Effect"
-	///This artifact is not real, and can not be rolled normally.
+	///This artifact is not real[such as a base class for further effects], and can not be rolled normally.
 	var/do_not_roll = FALSE
 	///Does this show up on the artifact fourm?
 	var/super_secret = FALSE

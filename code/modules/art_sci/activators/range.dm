@@ -11,7 +11,7 @@
 	name = "Physical Trauma"
 	required_stimuli = STIMULUS_FORCE
 	highest_trigger_amount = 10 //*meaty thwack* *both chuckle*
-	hint_texts = list("You almost want to start hitting things.", "A good whack might fix this.")
+	hint_texts = list("You almost want to start hitting things.", "A good whack might fix this.", "You suddenly want to throw something heavy at it.")
 	discovered_text = "Activated by Kinetic Energy"
 
 /datum/artifact_activator/range/force/New()
@@ -31,7 +31,7 @@
 	name = "Electrically Charged"
 	required_stimuli = STIMULUS_SHOCK
 	highest_trigger_amount = 1200
-	hint_texts = list("You can feel the static in the air.", "Your hairs stand on their ends.")
+	hint_texts = list("You can feel the static in the air.", "Your hairs stand on their ends.","Shockingly, it exists.")
 	discovered_text = "Activated by Electrical Energy"
 
 /datum/artifact_activator/range/shock/New()
@@ -42,5 +42,8 @@
 	required_stimuli = STIMULUS_RADIATION
 	highest_trigger_amount = 5
 	base_trigger_amount = 1 //x-ray machine goes from 1-10
-	hint_texts = list("Emits a hum that resembles the Supermatter.", "You swear you saw your bones for a second.")
+	hint_texts = list("Emits a hum that resembles the Supermatter.", "You swear you saw your bones for a second.", "It desires to glow like uranium glass.")
 	discovered_text = "Activated by Radiation"
+
+/datum/artifact_activator/range/radiation/New()
+	base_trigger_amount = rand(1,highest_trigger_amount)

@@ -156,9 +156,17 @@
 	size = 5
 
 	asteroid_weight = 20
+
 /datum/map_template/asteroid/itsastone
 	name = "Large Oblong Asteroid"
 	suffix = "football.dmm"
 	size = 7
+
+	asteroid_weight = 10
+
+/datum/map_template/asteroid/amogus
+	name = "Suspicious Asteroid"
+	suffix = "sustroid.dmm"
+	size = 3
 
 	asteroid_weight = 10

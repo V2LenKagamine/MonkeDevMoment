@@ -1,5 +1,5 @@
 /datum/artifact_effect/bomb
-	examine_hint = span_warning("This looks like it shouldn't be here.")
+	examine_hint = span_warning("Covered in dangerous looking markings...")
 	valid_activators = list(
 		/datum/artifact_activator/range/force,
 		/datum/artifact_activator/range/heat,

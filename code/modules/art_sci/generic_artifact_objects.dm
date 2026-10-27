@@ -80,3 +80,13 @@ ARTIFACT_SETUP(/obj/structure/artifact, SSobj, null, forced_effect, null)
 
 /obj/structure/artifact/smoke/exotic
 	forced_effect = /datum/artifact_effect/smoke/exotic
+
+/obj/structure/artifact/wizardly
+	forced_effect = /datum/artifact_effect/wizardly
+
+/obj/structure/artifact/philostone
+	forced_effect = /datum/artifact_effect/philostone
+
+/obj/structure/artifact/narsieoffering
+	forced_effect = /datum/artifact_effect/narsieoffering
+
