@@ -10,6 +10,6 @@
 		for(var/obj/thing in range(1,owner_turf))
 			if(thing.GetComponent(/datum/component/fantasy) || !isitem(thing) || HAS_TRAIT(thing,TRAIT_INNATELY_FANTASTICAL_ITEM))
 				continue
-			thing.AddComponent(/datum/component/fantasy,null,null,null,FALSE,TRUE)
+			thing.AddComponent(/datum/component/fantasy,null,null,FALSE,TRUE)
 	our_artifact?.artifact_deactivate()
 

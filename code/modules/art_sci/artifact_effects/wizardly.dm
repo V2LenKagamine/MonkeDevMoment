@@ -7,6 +7,7 @@
 	super_secret = TRUE
 	valid_activators = list(/datum/artifact_activator/touch/carbon)
 	valid_origins = list(/datum/artifact_origin/wizard)
+	/// What can this artifact grant when touched [and thus activated]
 	var/valid_grants = list(/datum/action/cooldown/spell/basic_heal,
 	/datum/action/cooldown/spell/pointed/projectile/fireball,
 	/datum/action/cooldown/spell/summonitem,

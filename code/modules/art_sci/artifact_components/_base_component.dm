@@ -114,7 +114,7 @@
 		artifact_effects += added_boogaloo
 		added_boogaloo.our_artifact = src
 		added_boogaloo.setup()
-		if(added_boogaloo.valid_origins && !(artifact_origin in added_boogaloo.valid_origins))//Ensures the forced effect matches the origin.
+		if(added_boogaloo.valid_origins && !(artifact_origin.type in added_boogaloo.valid_origins))//Ensures the forced effect matches the origin.
 			qdel(artifact_origin)
 			var/datum/artifact_origin/toobad = pick(added_boogaloo.valid_origins)
 			artifact_origin = new toobad
@@ -266,7 +266,7 @@
 			QDEL_NULL(added)
 			return FALSE
 	if(length(added.valid_origins))
-		if(!(artifact_origin in added.valid_origins))
+		if(!(artifact_origin.type in added.valid_origins))
 			QDEL_NULL(added)
 			return FALSE
 	if(length(added.valid_activators))

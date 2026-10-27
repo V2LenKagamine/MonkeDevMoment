@@ -26,6 +26,7 @@
 				thingy.update_overlays()
 				thingy.update_appearance()
 
+///What can this artifact replace with G O L D
 /datum/artifact_effect/philostone/proc/can_replace_material(obj/object)
 	for (var/type in PERMITTED_MATERIAL_REPLACE_TYPES)
 		if (istype(object, type))

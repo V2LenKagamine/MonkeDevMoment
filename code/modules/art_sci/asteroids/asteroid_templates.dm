@@ -166,7 +166,7 @@
 
 /datum/map_template/asteroid/amogus
 	name = "Suspicious Asteroid"
-	suffix = "sustroid.dmm"
+	suffix = "susteroid.dmm"
 	size = 3
 
 	asteroid_weight = 10
