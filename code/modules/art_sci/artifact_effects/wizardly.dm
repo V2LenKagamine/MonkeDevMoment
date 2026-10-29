@@ -3,6 +3,7 @@
 	examine_discovered = "Bestows Magic."
 	weight = ARTIFACT_UNCOMMON //Suprisingly still rare, as requires a touch-wizard artifact.
 	research_value = TECHWEB_TIER_6_POINTS //Its fucking MAGIC
+	discovered_credits = CARGO_CRATE_VALUE*10//YOU SOLD A FUCKING WIZARD BOOK?
 	type_name = "Wizardly Tome"
 	super_secret = TRUE
 	valid_activators = list(/datum/artifact_activator/touch/carbon)

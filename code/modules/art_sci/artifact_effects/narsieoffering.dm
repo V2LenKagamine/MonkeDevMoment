@@ -9,6 +9,7 @@
 	valid_activators = list(/datum/artifact_activator/touch/carbon)
 
 	research_value = TECHWEB_DISCOUNT_MINOR / 2
+	discovered_credits = CARGO_CRATE_VALUE*5//Cult artifact anyone?
 
 	/// How much blood is taken when used
 	var/blood_to_take = 1

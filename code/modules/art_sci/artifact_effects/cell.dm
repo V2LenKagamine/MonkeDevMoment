@@ -2,6 +2,7 @@
 	type_name = "Power Cell Effect"
 	weight = ARTIFACT_UNCOMMON
 	artifact_size = ARTIFACT_SIZE_TINY
+	discovered_credits = CARGO_CRATE_VALUE*1.5
 	valid_activators = list(
 		/datum/artifact_activator/range/heat,
 		/datum/artifact_activator/range/shock,

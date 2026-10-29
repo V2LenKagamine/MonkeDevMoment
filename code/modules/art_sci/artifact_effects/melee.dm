@@ -6,6 +6,7 @@
 	artifact_size = ARTIFACT_SIZE_SMALL
 	type_name = "Melee Weapon Effect"
 	weight = ARTIFACT_VERYUNCOMMON //rare
+	discovered_credits = CARGO_CRATE_VALUE *2//Haha boom
 	valid_activators = list(
 		/datum/artifact_activator/touch/silicon,
 		/datum/artifact_activator/range/heat,

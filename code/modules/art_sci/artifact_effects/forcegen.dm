@@ -18,6 +18,7 @@
 /datum/artifact_effect/forcegen
 	weight = ARTIFACT_UNCOMMON
 	type_name = "Forcefield Generator Effect"
+	discovered_credits = CARGO_CRATE_VALUE*2.5
 	activation_message = "springs to life and starts emitting a forcefield!"
 	deactivation_message = "shuts down, its forcefields shutting down with it."
 	valid_activators = list(

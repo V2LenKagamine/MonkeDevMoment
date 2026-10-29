@@ -7,7 +7,7 @@
 	examine_discovered = span_warning("It appears to be some sort of light source.")
 
 	artifact_size = ARTIFACT_SIZE_LARGE
-
+	discovered_credits = CARGO_CRATE_VALUE
 	research_value = TECHWEB_DISCOUNT_MINOR / 2
 
 /datum/artifact_effect/lamp/setup()

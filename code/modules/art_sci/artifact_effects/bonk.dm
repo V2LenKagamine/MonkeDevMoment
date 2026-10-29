@@ -3,6 +3,7 @@
 	type_name = "Slammer Effect"
 	activation_message = "opens up!"
 	deactivation_message = "closes up."
+	discovered_credits = CARGO_CRATE_VALUE//Not very weaponisable
 	valid_activators = list(
 		/datum/artifact_activator/touch/carbon,
 		/datum/artifact_activator/touch/silicon

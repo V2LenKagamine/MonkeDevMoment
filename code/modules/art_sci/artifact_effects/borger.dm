@@ -8,6 +8,7 @@
 		/datum/artifact_activator/touch/silicon
 	)
 	research_value = TECHWEB_DISCOUNT_MINOR * 4
+	discovered_credits = CARGO_CRATE_VALUE*3 //Borg factory anyone?
 	examine_hint = span_bolddanger("It is vaguely foreboding, <i>touching this might be a bad idea...</i>")
 	examine_discovered = span_bolddanger("It will turn a random limb robotic if touched, <i>touching this might be a bad idea...</i>")
 	/// The time between each limb replacement

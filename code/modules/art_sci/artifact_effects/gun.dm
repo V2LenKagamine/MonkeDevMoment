@@ -13,6 +13,7 @@
 	valid_type_paths = list(/obj/item/gun/magic/artifact)
 
 	research_value = TECHWEB_DISCOUNT_MINOR
+	discovered_credits = CARGO_CRATE_VALUE*4//BANG BANG BANG
 
 	examine_discovered = span_warning("It appears to be some sort of projectile weapon!")
 

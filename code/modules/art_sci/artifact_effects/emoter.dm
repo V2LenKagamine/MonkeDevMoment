@@ -3,6 +3,7 @@
 	type_name = "Emote Field Effect"
 	activation_message = "springs to life and starts emitting a strange energy!"
 	deactivation_message = "shuts down, its strange energy dissipating."
+	discovered_credits = CARGO_CRATE_VALUE*0.5
 	valid_activators = list(
 		/datum/artifact_activator/touch/carbon,
 		/datum/artifact_activator/touch/silicon,

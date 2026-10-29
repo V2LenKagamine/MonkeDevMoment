@@ -4,7 +4,7 @@
 	///string added to artifact desc, if the effect has been discovered
 	var/examine_discovered
 	///When you discover this, how many credits does it add to the sell price?
-	var/discovered_credits = CARGO_CRATE_VALUE*0.75
+	var/discovered_credits = CARGO_CRATE_VALUE*1.5
 	///how likely is it that this effect is added to an artifact?
 	var/weight = ARTIFACT_COMMON
 	///if defined, artifact must be this size to roll

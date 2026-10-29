@@ -12,6 +12,7 @@
 	examine_discovered = span_warning("It appears to heal those who touch it.")
 
 	research_value = TECHWEB_DISCOUNT_MINOR / 2
+	discovered_credits = CARGO_CRATE_VALUE*2//Free heals anyone?
 
 	///list of what we heal
 	var/list/damage_types = list(

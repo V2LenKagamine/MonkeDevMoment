@@ -51,14 +51,17 @@
 	var/list/allfaults = list()
 	for(var/datum/artifact_fault/subtype as anything in subtypesof(/datum/artifact_fault))
 		allfaults += initial(subtype.name)
+	allfaults += "No Fault"
 
 	var/list/trigger_names = list()
 	for(var/datum/artifact_activator/subtype as anything in subtypesof(/datum/artifact_activator))
+		if(!subtype.can_appear)
+			continue
 		trigger_names += initial(subtype.name)
 
 	var/list/artifact_names = list()
 	for(var/datum/artifact_effect/subtype as anything in subtypesof(/datum/artifact_effect))
-		if(subtype.super_secret)
+		if(subtype.super_secret || subtype.do_not_roll)
 			continue //shhhhh
 		artifact_names += initial(subtype.type_name)
 
@@ -206,22 +209,24 @@
 			bonus += round(discovered.discovered_credits * ((discovered.potency + 25)/50))
 	if(art.chosen_fault && art.fault_discovered)
 		bonus += art.chosen_fault.discovered_credits
+	if(!art.chosen_fault)
+		bonus += CARGO_CRATE_VALUE * 5 //Cool, flawless!
 	if(art.artifact_origin.type_name == chosen_origin)
 		bonus += labeling_bonus
 	else
-		bonus -= labeling_bonus
+		bonus -= CARGO_CRATE_VALUE
 	if(chosen_effects)
 		for(var/name_effect in chosen_effects)
 			for(var/datum/artifact_effect/effect as anything in art.artifact_effects)
 				if(effect.type_name != name_effect)
-					bonus -= labeling_bonus
+					bonus -= CARGO_CRATE_VALUE
 				else
 					bonus += labeling_bonus
 	if(chosentriggers)
 		for(var/name_trigger in chosentriggers)
 			for(var/datum/artifact_activator/activator as anything in art.activators)
 				if(activator.name != name_trigger)
-					bonus -= labeling_bonus
+					bonus -= CARGO_CRATE_VALUE
 				else
 					bonus += labeling_bonus
 	return round(baseval + bonus)

@@ -19,7 +19,7 @@
 	COOLDOWN_DECLARE(cooldown)
 
 	research_value = TECHWEB_DISCOUNT_MINOR / 4 //To busy vomiting cant research
-
+	discovered_credits = -CARGO_CRATE_VALUE*4//WHO COULD INVENT SUCH A HORRIBLE THING
 
 	examine_discovered = span_warning("It appears to be some sort of sick prank.")
 

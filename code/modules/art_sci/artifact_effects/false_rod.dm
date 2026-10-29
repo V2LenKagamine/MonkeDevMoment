@@ -2,7 +2,7 @@
 	examine_hint = span_warning("You feel a binding aura connected to this.")
 	examine_discovered = span_warning("Will bind itself to the wearer, forcing upon them an oath to heal!")
 	weight = ARTIFACT_UNCOMMON
-
+	discovered_credits = CARGO_CRATE_VALUE*3 // free healing?
 	artifact_size = ARTIFACT_SIZE_SMALL
 	type_name = "Oath-Bearing Rod Effect"
 

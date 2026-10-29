@@ -8,6 +8,7 @@
 	examine_discovered = "Turns nearby iron structures into gold!"
 	weight = ARTIFACT_VERYRARE
 	research_value = TECHWEB_TIER_7_POINTS //GOOOOOOOOOLD
+	discovered_credits = CARGO_CRATE_VALUE*50//It literally prints money
 	type_name = "Midas Stone Effect"
 
 /datum/artifact_effect/philostone/effect_process()

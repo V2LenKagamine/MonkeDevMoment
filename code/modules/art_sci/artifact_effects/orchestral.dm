@@ -9,7 +9,7 @@
 	)
 
 	research_value = TECHWEB_DISCOUNT_MINOR
-
+	discovered_credits = CARGO_CRATE_VALUE*2.5//Soothing
 	examine_discovered = span_warning("It appears to play smooth jazz, but suddenly.")
 	var/sound_hit_list = list(
 		'sound/effects/artifacts/orchestral/hit01.ogg',

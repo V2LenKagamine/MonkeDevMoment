@@ -19,20 +19,9 @@
 	///activators that activate the artifact
 	var/list/datum/artifact_activator/activators = list()
 	var/max_activators = BASE_MAX_ACTIVATORS
-	///Valid activators to pick,mostly legacy code.
-	var/list/valid_activators = list(
-		/datum/artifact_activator/touch/carbon,
-		/datum/artifact_activator/touch/silicon,
-		/datum/artifact_activator/touch/data,
-
-		/datum/artifact_activator/range/force,
-		/datum/artifact_activator/range/heat,
-		/datum/artifact_activator/range/shock,
-		/datum/artifact_activator/range/radiation,
-	)
 	///this artifacts origin
 	var/datum/artifact_origin/artifact_origin
-	///Just any effect that is real and can be added to an artifact. Mostly legacy
+	///Just any effect that is real and can be added to an artifact. TODO: Move this to autogenerate like the other two
 	var/list/valid_origins = list(
 		/datum/artifact_origin/narsie,
 		/datum/artifact_origin/wizard,
@@ -58,6 +47,8 @@
 	var/explict_examine
 	///Fault = weight
 	var/static/list/datum/artifact_fault/fault_weight_list
+	///Valid activators to pick from, dynamically generated from all that can roll.
+	var/static/list/datum/artifact_activator/all_activators
 
 	///The activators we have discovered.
 	var/list/datum/artifact_activator/discovered_activators = list()
@@ -81,9 +72,9 @@
 		artifact_size = forced_size
 
 	if(!length(fault_weight_list))
-		var/list/datum/artifact_fault/valid_faults_pre = typecacheof(/datum/artifact_fault,ignore_root_path = TRUE)
+		var/list/temp = typecacheof(/datum/artifact_fault,ignore_root_path = TRUE)
 		var/list/datum/artifact_fault/valid_faults = list()
-		for(var/datum/artifact_fault/fault as anything in valid_faults_pre)
+		for(var/datum/artifact_fault/fault as anything in temp)
 			valid_faults += fault
 			valid_faults[fault] = fault.weight
 		fault_weight_list = valid_faults
@@ -101,10 +92,20 @@
 	if(LAZYLEN(artifact_origin.deactivation_sounds))
 		deactivation_sound = pick(artifact_origin.deactivation_sounds)
 	setup()
+	//Setup valid activators if we have none
+	if(!length(all_activators))
+		var/list/temp = typecacheof(/datum/artifact_activator,ignore_root_path = TRUE)
+		var/list/datum/artifact_activator/tempall = list()
+		for(var/datum/artifact_activator/activator as anything in temp)
+			if(!activator.can_appear)
+				continue
+			tempall += activator
+		all_activators = tempall
 	var/activator_amount = rand(1,max_activators)
+	var/list/possible_activators = all_activators.Copy()
 	for(var/i in 1 to activator_amount)
-		var/selection = pick(valid_activators)
-		valid_activators -= selection
+		var/selection = pick(possible_activators)
+		possible_activators -= selection
 		var/datum/artifact_activator/activator = new selection()
 		activators += activator
 		var/potency = rand(0,100)
@@ -360,6 +361,7 @@
 	for(var/datum/artifact_effect/effect in artifact_effects)
 		effect.effect_deactivate(silent)
 
+///Called when someone t o u c h the artifact holder.
 /datum/component/artifact/effect_touched(mob/living/user)
 	for(var/datum/artifact_effect/effect in artifact_effects)
 		effect.effect_touched(user)
@@ -372,25 +374,22 @@
 	var/checked_fault = FALSE // to make sure we run our fault once
 	var/correct_trigger = FALSE
 	for(var/datum/artifact_activator/listed_activator in activators)
-		var/stimuli_is_matching = listed_activator.required_stimuli & stimuli
-		if(!stimuli_is_matching && chosen_fault)
+		if(!(stimuli in listed_activator.required_stimuli))
+			continue
+		if(chosen_fault)
 			if(!triggers_faults || checked_fault)
 				continue
 			if(freebies >= 1)
 				freebies--
-				continue
 			checked_fault = TRUE
-			if(prob(chosen_fault.trigger_chance))
+			if(prob(chosen_fault.trigger_chance) && freebies <= 0)
 				logger.Log(LOG_CATEGORY_ARTIFACT, "[parent]'s fault has been triggered, trigger type [chosen_fault].")
 				chosen_fault.on_trigger(src)
 				if(chosen_fault.visible_message)
 					holder.visible_message(span_warning("[holder] [chosen_fault.visible_message]"))
-			continue
-		if(!stimuli_is_matching)
-			continue
 		if(istype(listed_activator, /datum/artifact_activator/range) && stimuli_value < listed_activator.amount)
 			continue // the """"refactor"""" butchered the hell out of stimulus and whatever else so i need to keep it simple
-		correct_trigger = TRUE
+		correct_trigger = TRUE //Hey I tried my best ok? ^
 		break
 	if(active || !correct_trigger)
 		return

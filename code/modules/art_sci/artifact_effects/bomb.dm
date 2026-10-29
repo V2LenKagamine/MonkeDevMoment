@@ -83,6 +83,7 @@
 
 /datum/artifact_effect/bomb/explosive
 	type_name = "Bomb"
+	discovered_credits = CARGO_CRATE_VALUE*3//Nanotransen likes weapons
 	weight = ARTIFACT_RARE
 	super_secret = FALSE
 	do_not_roll = FALSE
@@ -111,7 +112,7 @@
 	do_alert = TRUE
 	weight = ARTIFACT_VERYRARE
 	explode_delay = 2 MINUTES
-
+	discovered_credits = CARGO_CRATE_VALUE*4//Haha boom
 	super_secret = FALSE
 	do_not_roll = FALSE
 
@@ -141,6 +142,7 @@
 	)
 	super_secret = FALSE
 	do_not_roll = FALSE
+	discovered_credits = CARGO_CRATE_VALUE*5//Haha war crime boom
 
 /datum/artifact_effect/bomb/gas/setup()
 	. = ..()
