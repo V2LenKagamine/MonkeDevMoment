@@ -83,7 +83,7 @@
 
 /datum/artifact_effect/bomb/explosive
 	type_name = "Bomb"
-	discovered_credits = CARGO_CRATE_VALUE*3//Nanotransen likes weapons
+	discovered_credits = CARGO_CRATE_VALUE*3//Nanotrasen likes weapons
 	weight = ARTIFACT_RARE
 	super_secret = FALSE
 	do_not_roll = FALSE
