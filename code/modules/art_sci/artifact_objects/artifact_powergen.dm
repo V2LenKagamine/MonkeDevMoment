@@ -1,5 +1,5 @@
 #define MAX_POSSIBLE_GEN 800 MW
-#define SIDEEFFECT_THRESHOLD 100 KW
+#define SIDEEFFECT_THRESHOLD 100 MW
 #define SHITFUCK_THRESHOLD 600 MW
 
 /obj/machinery/power/generator_artifact
@@ -44,7 +44,7 @@ ARTIFACT_SETUP(/obj/machinery/power/generator_artifact, SSmachines, null, /datum
 	else
 		power_gen = rand(1 KW, MAX_POSSIBLE_GEN)
 	unstable_generation = prob(40)
-	potency = power_gen / (6 KW) // 100 potency at 600kw generation
+	potency = power_gen / (6 MW) // 100 potency at 600MW generation
 
 /datum/artifact_effect/generator/effect_touched(mob/living/user)
 	var/obj/machinery/power/generator_artifact/powerholder = our_artifact.holder
@@ -80,7 +80,7 @@ ARTIFACT_SETUP(/obj/machinery/power/generator_artifact, SSmachines, null, /datum
 		return
 	COOLDOWN_START(src,sideeffect_cooldown,rand(4,8) SECONDS)
 	//minor to medium side effects
-	if(power_gen >= (SHITFUCK_THRESHOLD / 3))
+	if(power_gen >= (401 MW))
 		powerholder.visible_message(span_danger("\The [our_artifact.holder] lets out a shower of thunder!"), span_hear("You hear a loud electrical crack!"))
 		playsound(get_turf(powerholder), 'sound/effects/magic/lightningshock.ogg', 100, TRUE, extrarange = 5)
 		tesla_zap(powerholder, rand(2,3), power_gen / 3500)

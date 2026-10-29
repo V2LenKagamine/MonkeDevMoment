@@ -106,7 +106,7 @@
 		if(0)
 			. += span_notice("Will currently try to summon a random artifact.")
 		if(1)
-			. += span_notice("Will currently try to summon a blank artifact")
+			. += span_notice("Will currently try to summon a blank artifact.")
 		if(2)
 			. += span_notice("Will currently try to copy the disk to a new or existing artifact.")
 		if(3)
