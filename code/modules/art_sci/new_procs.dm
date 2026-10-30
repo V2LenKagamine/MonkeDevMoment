@@ -19,7 +19,7 @@
 	return rgb(red, green, blue, alpha)
 
 ///Spawn a new artifact
-/proc/spawn_artifact(turf/loc, forced_origin = null, forced_effect = null)
+/proc/spawn_artifact(turf/loc, datum/artifact_origin/forced_origin = null, datum/artifact_effect/forced_effect = null)
 	if (!loc)
 		return
 	if(!length(GLOB.artifact_effect_rarity))
@@ -34,6 +34,27 @@
 		/obj/item/melee/artifact = 5,
 		/obj/machinery/power/generator_artifact = 5
 	))
+	if(forced_effect) //Ok this gon be really scuffed.
+		if(forced_effect.artifact_size == 1) //can be any item
+			type_of_artifact = pick_weight(list(
+				/obj/item/artifact_item = 1,
+				/obj/item/gun/magic/artifact = 1,
+				/obj/item/melee/artifact = 1,
+			))
+		if(forced_effect.artifact_size == 0) //Ok TINY item
+			type_of_artifact = pick_weight(list(
+				/obj/item/artifact_item_tiny = 50,
+				/obj/item/stock_parts/power_store/cell/artifact = 50,
+			))
+		switch(forced_effect) //Ok its a specific type, it HAS to be this one.
+			if(/datum/artifact_effect/cell)
+				type_of_artifact = /obj/item/stock_parts/power_store/cell/artifact
+			if(/datum/artifact_effect/gun)
+				type_of_artifact = /obj/item/gun/magic/artifact
+			if(/datum/artifact_effect/melee)
+				type_of_artifact = /obj/item/melee/artifact
+			if(/datum/artifact_effect/generator)
+				type_of_artifact = /obj/machinery/power/generator_artifact
 
 	var/obj/A = new type_of_artifact(loc,forced_origin,forced_effect)
 	return A

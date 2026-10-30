@@ -1,7 +1,7 @@
 /datum/artifact_effect/narsieoffering
 	examine_discovered = "Makes an offering to the dark gods."
 	type_name = "Dark Altar Effect"
-	weight = ARTIFACT_COMMON //Common because can only be on carbon touch narsie
+	weight = ARTIFACT_COMMON * 2 //Very rare despite high weight
 
 	examine_hint = span_warning("You feel calm and safe around this...")
 	valid_origins = list(/datum/artifact_origin/narsie)

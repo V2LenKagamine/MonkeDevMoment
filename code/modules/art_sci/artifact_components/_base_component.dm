@@ -249,6 +249,8 @@
 */
 /datum/component/artifact/proc/try_add_effect(datum/artifact_effect/effect)
 	var/datum/artifact_effect/added
+	if(!effect)
+		return FALSE
 	if(ispath(effect))
 		added = new effect //We need it now, becasue for some reason we cant read the lists from just the raw datum.
 	else

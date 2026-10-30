@@ -1,7 +1,7 @@
 /datum/artifact_effect/wizardly
 	examine_hint = "Radiates a magical aura."
 	examine_discovered = "Bestows Magic."
-	weight = ARTIFACT_UNCOMMON //Suprisingly still rare, as requires a touch-wizard artifact.
+	weight = ARTIFACT_RARE //Suprisingly still rare, as requires a touch-wizard artifact.
 	research_value = TECHWEB_TIER_6_POINTS //Its fucking MAGIC
 	discovered_credits = CARGO_CRATE_VALUE*10//YOU SOLD A FUCKING WIZARD BOOK?
 	type_name = "Wizardly Tome"
@@ -14,7 +14,9 @@
 	/datum/action/cooldown/spell/summonitem,
 	/datum/action/cooldown/spell/conjure_item/spellpacket,
 	/datum/action/cooldown/spell/forcewall,
-	/datum/action/cooldown/spell/conjure/bee)
+	/datum/action/cooldown/spell/conjure/bee,
+	/datum/action/cooldown/spell/smoke/lesser,
+	/datum/action/cooldown/spell/conjure/cheese/)
 
 /datum/artifact_effect/wizardly/effect_touched(mob/living/user)
 	var/spell = pick(valid_grants)

@@ -30,7 +30,7 @@
 	var/do_alert = FALSE //do we send an announcement on activation
 
 /datum/artifact_effect/bomb/setup()
-	if(prob(20))
+	if(prob(5))
 		dud = TRUE
 
 /datum/artifact_effect/bomb/effect_activate()

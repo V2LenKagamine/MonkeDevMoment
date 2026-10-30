@@ -29,11 +29,11 @@
 		if(2)
 			display_text = "create a copy of inserted disk"
 		if(3)
-			display_text = "create or modify an artifact with just the inserted disks activator."
+			display_text = "modify an existing artifact with just the inserted disks activator."
 		if(4)
-			display_text = "create or modify an artifact with just the inserted disks fault."
+			display_text = "modify an existing artifact with just the inserted disks fault."
 		if(5)
-			display_text = "create or modify an artifact with just the inserted disks effect."
+			display_text = "modify an existing artifact with just the inserted disks effect."
 	to_chat(user,span_notice("You set [src] to [display_text]"))
 
 /obj/item/artifact_summon_wand/attackby_secondary(obj/item/weapon, mob/user, params)
@@ -57,7 +57,7 @@
 	var/turf/attempt_location = get_turf(get_step(user,user.dir))
 	if(attempt_location.density)
 		return
-	if(ISINRANGE(selected_mode, 2, 5))
+	if(ISINRANGE(selected_mode, 3, 5))
 		return
 	visible_message(span_notice("[user] begins to summon an artifact using [src]!"),span_notice("You begin attempting to summon an artifact using [src]..."))
 	if(do_after(user, 5 SECONDS))
@@ -70,13 +70,16 @@
 			if(1)
 				art_comp.clear_out()
 			if(2)
-				art_comp.clear_out()
+				qdel(new_artifact) //Ok, we need to just restart with a new artifact here because some [Gun,Battery...] have their own type.
+				var/obj/newer_artifact = spawn_artifact(attempt_location,forced_effect = slotted_disk.effect)
+				var/datum/component/artifact/new_comp = newer_artifact.GetComponent(/datum/component/artifact)
+				new_comp.clear_out() //Yes I know we just made one, but we need it blank because we want a COPY, no random BS!
 				if(slotted_disk.activator)
-					art_comp.add_activator(slotted_disk.activator)
+					new_comp.add_activator(slotted_disk.activator)
 				if(slotted_disk.fault)
-					art_comp.change_fault(slotted_disk.fault)
+					new_comp.change_fault(slotted_disk.fault)
 				if(slotted_disk.effect)
-					art_comp.try_add_effect(slotted_disk.effect)
+					new_comp.try_add_effect(slotted_disk.effect)
 			if(3)
 				art_comp.clear_out()
 				if(slotted_disk.activator)
@@ -110,11 +113,11 @@
 		if(2)
 			. += span_notice("Will currently try to copy the disk to a new or existing artifact.")
 		if(3)
-			. += span_notice("Will currently try to copy the disk activator to a new or existing artifact.")
+			. += span_notice("Will currently try to copy the disk activator to an existing artifact.")
 		if(4)
-			. += span_notice("Will currently try to copy the disk fault to a new or existing artifact.")
+			. += span_notice("Will currently try to copy the disk fault to an existing artifact.")
 		if(5)
-			. += span_notice("Will currently try to copy the disk effect to a new or existing artifact.")
+			. += span_notice("Will currently try to copy the disk effect to an existing artifact.")
 
 /obj/item/artifact_summon_wand/attack_atom(atom/attacked_atom, mob/living/user, params)
 	var/datum/component/artifact/art_comp = attacked_atom.GetComponent(/datum/component/artifact)
