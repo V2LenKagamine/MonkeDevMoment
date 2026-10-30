@@ -134,7 +134,7 @@
 	suffix = "cargo_danger.dmm"
 	size = 3
 
-	asteroid_weight = 5
+	asteroid_weight = 10
 
 /datum/map_template/asteroid/cargo_artifacts
 	name = "Abandoned Shipping Container"
@@ -169,4 +169,11 @@
 	suffix = "susteroid.dmm"
 	size = 3
 
-	asteroid_weight = 10
+	asteroid_weight = 5
+
+/datum/map_template/asteroid/loss
+	name = "Lossed Asteroid"
+	suffix = "lossteroid.dmm"
+	size = 5
+
+	asteroid_weight = 5
