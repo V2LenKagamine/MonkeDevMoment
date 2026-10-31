@@ -72,3 +72,26 @@
 		/datum/reagent/australium,
 		/datum/reagent/shakeium,
 	)
+
+/datum/artifact_effect/smoke/chaos
+	weight = ARTIFACT_VERYRARE
+	examine_hint = span_warning("I do NOT feel safe with this in the room.")
+	type_name = "Smoke Machine (Chaotic) Effect"
+	research_value = TECHWEB_DISCOUNT_MINOR
+	activation_message = "starts spewing out unknown smoke!"
+	super_secret = TRUE
+	examine_discovered = span_danger("It appears to be some sort of chemical aerolyzer for causing immense chaos!")
+
+/datum/artifact_effect/smoke/chaos/effect_activate(silent)
+	if(our_artifact.holder)
+		for(var/chemical in chemicals)
+			do_chem_smoke(smoke_range, holder = our_artifact.holder, location = get_turf(our_artifact.holder), reagent_type = chemical, reagent_volume = per_chemical_amount, log = TRUE)
+		our_artifact.artifact_deactivate()
+
+/datum/artifact_effect/smoke/chaos/setup()
+	valid_chemicals = subtypesof(/datum/reagent) //GOOD LUCK EVERYBODY
+	per_chemical_amount = rand(5, 10)
+	chemicals_chosen = 1
+	smoke_range = 1
+	potency += 150
+	chemicals += pick(valid_chemicals)

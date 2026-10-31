@@ -177,3 +177,17 @@
 	size = 5
 
 	asteroid_weight = 5
+
+/datum/map_template/asteroid/cube
+	name = "Cubic Asteroid"
+	suffix = "cube.dmm"
+	size = 3
+
+	asteroid_weight = 20
+
+/datum/map_template/asteroid/fishinghole
+	name = "Wet Asteroid"
+	suffix = "fishinghole.dmm"
+	size = 6
+
+	asteroid_weight = 35

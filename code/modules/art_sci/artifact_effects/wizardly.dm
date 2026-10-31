@@ -16,7 +16,7 @@
 	/datum/action/cooldown/spell/forcewall,
 	/datum/action/cooldown/spell/conjure/bee,
 	/datum/action/cooldown/spell/smoke/lesser,
-	/datum/action/cooldown/spell/conjure/cheese/)
+	/datum/action/cooldown/spell/conjure/cheese)
 
 /datum/artifact_effect/wizardly/effect_touched(mob/living/user)
 	var/spell = pick(valid_grants)
@@ -25,5 +25,5 @@
 		if(boi.spell_requirements & SPELL_REQUIRES_WIZARD_GARB)
 			boi.spell_requirements &= ~SPELL_REQUIRES_WIZARD_GARB
 		boi.Grant(user)
-	to_chat(user,span_boldnotice("You can't find where [src.our_artifact.holder] went."))
-	qdel(src.our_artifact.holder)
+	our_artifact?.holder?.visible_message(span_boldnotice("[src.our_artifact.holder] vanishes in a wizardly fashion!"))
+	qdel(our_artifact?.holder)

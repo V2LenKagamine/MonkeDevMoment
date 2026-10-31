@@ -3935,6 +3935,7 @@
 #include "code\modules\art_sci\artifact_effects\lamp.dm"
 #include "code\modules\art_sci\artifact_effects\meat.dm"
 #include "code\modules\art_sci\artifact_effects\melee.dm"
+#include "code\modules\art_sci\artifact_effects\mindswap.dm"
 #include "code\modules\art_sci\artifact_effects\money.dm"
 #include "code\modules\art_sci\artifact_effects\narsieoffering.dm"
 #include "code\modules\art_sci\artifact_effects\orchestral.dm"
